@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FreshMarket</title>
-    @vite('resources/css/app.css')
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-white m-0 p-0">
 
@@ -17,18 +18,18 @@
     <ul class="flex flex-col md:flex-row items-center gap-4 md:gap-8 text-gray-700">
         <li><a href="#" class="hover:text-red-500">Accueil</a></li>
         <li><a href="#" class="hover:text-red-500">Blog</a></li>
-          <li><a href="#" class="hover:text-red-500">Contact</a></li>
+        <li><a href="#" class="hover:text-red-500">Contact</a></li>
     </ul>
 
     <div class="flex items-center gap-2 md:gap-4">
         <input type="text" placeholder="Search..."
                class="bg-gray-100 rounded-full px-4 py-2 outline-none w-full md:w-auto">
-        <button class="flex items-center gap-2 bg-red-500 text-white px-4 py-2 rounded-full hover:bg-red-600">
+        <a href="{{ route('login') }}" class="flex items-center gap-2 bg-red-500 text-white px-4 py-2 rounded-full hover:bg-red-600">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
             </svg>
-            <span class="font-medium hidden md:inline"><a href="">Login</a></span>
-        </button>
+            <span class="font-medium hidden md:inline">Login</span>
+        </a>
         <button class="flex items-center justify-center w-12 h-12 bg-red-500 rounded-full hover:bg-red-600">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -40,11 +41,12 @@
 
 <!-- HERO SECTION -->
 <section class="relative grid grid-cols-1 md:grid-cols-2 px-6 md:px-12 pt-10 pb-16 gap-8 md:gap-0">
-    <!-- Petits plus rouges --> 
-     <div class="absolute top-5 left-72 text-red-500 text-3xl font-bold rotate-12">+</div> 
-     <div class="absolute top-40 left-80 text-black-500 text-3xl font-bold -rotate-12">+</div> 
-     <!-- Grand rond jaune --> 
+    <!-- Petits plus rouges -->
+    <div class="absolute top-5 left-72 text-red-500 text-3xl font-bold rotate-12">+</div>
+    <div class="absolute top-40 left-80 text-black text-3xl font-bold -rotate-12">+</div>
+    <!-- Grand rond jaune -->
     <div class="absolute top-32 right-20 w-16 h-16 bg-yellow-400 rounded-full z-10"></div>
+
     <!-- LEFT TEXT -->
     <div class="flex flex-col justify-center z-10">
         <p class="text-red-500 font-semibold tracking-wide">EPICERIE EN LIGNE</p>
@@ -60,7 +62,7 @@
 
     <!-- RIGHT IMAGE -->
     <div class="relative z-0 flex justify-center items-center">
-        <img src="/images/food4.png" class="w-full max-w-md h-auto object-contain" alt="Food Bag Image">
+        <img src="{{ asset('images/food4.png') }}" class="w-full max-w-md h-auto object-contain" alt="Food Bag Image">
     </div>
 </section>
 
@@ -75,7 +77,7 @@
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
         <!-- ARTICLE 1 -->
         <div class="bg-white shadow-md rounded-lg overflow-hidden">
-            <img src="/images/foodware.jpg" alt="Recette rapide" class="w-full h-48 object-cover">
+            <img src="{{ asset('images/foodware.jpg') }}" alt="Recette rapide" class="w-full h-48 object-cover">
             <div class="p-6">
                 <h3 class="text-xl md:text-2xl font-bold mb-2">5 Recettes rapides avec vos courses</h3>
                 <p class="text-gray-500 mb-4 text-sm md:text-base">Découvrez comment préparer des repas délicieux et rapides avec les produits que vous commandez chez FreshMarket.</p>
@@ -84,7 +86,7 @@
         </div>
         <!-- ARTICLE 2 -->
         <div class="bg-white shadow-md rounded-lg overflow-hidden">
-            <img src="/images/foodware1.jpg" alt="Conservation aliments" class="w-full h-48 object-cover">
+            <img src="{{ asset('images/foodware1.jpg') }}" alt="Conservation aliments" class="w-full h-48 object-cover">
             <div class="p-6">
                 <h3 class="text-xl md:text-2xl font-bold mb-2">Bien conserver vos produits frais</h3>
                 <p class="text-gray-500 mb-4 text-sm md:text-base">Astuces simples pour que vos fruits, légumes et produits laitiers restent frais plus longtemps.</p>
@@ -93,7 +95,7 @@
         </div>
         <!-- ARTICLE 3 -->
         <div class="bg-white shadow-md rounded-lg overflow-hidden">
-            <img src="/images/foodware2.jpg" alt="Nouveautés ShopFresh" class="w-full h-48 object-cover">
+            <img src="{{ asset('images/foodware2.jpg') }}" alt="Nouveautés ShopFresh" class="w-full h-48 object-cover">
             <div class="p-6">
                 <h3 class="text-xl md:text-2xl font-bold mb-2">Nouveautés de la semaine</h3>
                 <p class="text-gray-500 mb-4 text-sm md:text-base">Découvrez les nouveaux produits ajoutés à notre catalogue et profitez de nos promotions exclusives.</p>
@@ -116,6 +118,7 @@
         <div class="bg-white shadow-lg rounded-xl p-6 md:p-8">
             <h3 class="text-2xl md:text-3xl font-bold mb-4 text-red-600">Envoyez-nous un message</h3>
             <form action="#" method="POST" class="flex flex-col gap-4">
+                @csrf
                 <input type="text" name="name" placeholder="Votre nom"
                     class="border border-gray-300 rounded-lg px-3 py-2 md:px-4 md:py-3 focus:outline-none focus:ring-2 focus:ring-red-500 transition">
                 <input type="email" name="email" placeholder="Votre email"
