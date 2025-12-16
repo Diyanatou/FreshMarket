@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use App\Models\Role; 
 
 class AuthController extends Controller
 {
@@ -15,11 +16,18 @@ class AuthController extends Controller
             'email'    => 'required|email|unique:users,email',
             'password' => 'required|string|min:6|confirmed',
         ]);
+        
+        $roleClient = Role::where('name', 'client')->first();
+
+        if (!$roleClient) {
+            return back()->with('error', 'Le rôle client n’existe pas dans la base de données.');
+        }
 
         User::create([
             'name'     => $validated['name'],
             'email'    => $validated['email'],
             'password' => Hash::make($validated['password']),
+            'role_user'=> $roleClient->id,
         ]);
 
         return redirect()->route('login')->with('success', 'Compte créé avec succès !');
