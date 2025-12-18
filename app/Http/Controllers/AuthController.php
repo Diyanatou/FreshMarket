@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Role; 
 
@@ -34,28 +35,33 @@ class AuthController extends Controller
     }
 
     public function login(Request $request)
-    {
-        $request->validate([
-            'email'    => 'required|email',
-            'password' => 'required|string',
-        ]);
+{
+    $credentials = $request->validate([
+        'email' => 'required|email',
+        'password' => 'required|string',
+    ]);
 
-        $user = User::where('email', $request->email)->first();
-
-        if (!$user || !Hash::check($request->password, $user->password)) {
-            return back()->withErrors([
-                'email' => 'Les informations d’identification sont incorrectes.',
-            ])->onlyInput('email');
-        }
-        $request->session()->regenerate();
-
-        $request->session()->put('user_id', $user->id);
-        $request->session()->put('user_name', $user->name);
-        $request->session()->put('user_email', $user->email);
-        $request->session()->put('user_role', $user->role ?? 'user');
-
-        return redirect('/dashboard');
+    if (!Auth::attempt($credentials)) {
+        return back()->withErrors([
+            'email' => 'Les informations d’identification sont incorrectes.',
+        ])->onlyInput('email');
     }
+
+    $request->session()->regenerate();
+
+    $user = Auth::user();
+
+    // Redirection selon le rôle
+    if ($user->role_user == 1) { // client
+        return redirect('/client/home');
+    }
+
+    if ($user->role_user == 2) { // admin
+        return redirect('/admin/dashboard');
+    }
+
+    return redirect('/');
+}
 
     public function logout(Request $request)
     {

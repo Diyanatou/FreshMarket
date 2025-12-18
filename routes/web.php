@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Admin\AdminDashboardController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -25,7 +27,14 @@ Route::post('/login', [AuthController::class, 'login'])
 Route::post('/logout', [AuthController::class, 'logout'])
     ->name('logout');
 
+Route::middleware(['auth'])->group(function () {
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware('session.auth');
+    Route::get('/client/home', function () {
+        return view('client.home');
+    });
+    Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])
+        ->name('admin.dashboard');
+
+});
+
+
