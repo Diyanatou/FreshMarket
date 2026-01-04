@@ -15,7 +15,7 @@
         </div>
     <!-- RIGHT IMAGE -->
     <div class="relative z-0 flex justify-center items-center">
-        <img src="{{ asset('images/food4.png') }}" class="w-full max-w-md h-auto object-contain" alt="Food Bag Image">
+        <img src="{{ asset('images/food.png') }}" class="w-full max-w-md h-auto object-contain" alt="Food Bag Image">
     </div>
 </div>
 
