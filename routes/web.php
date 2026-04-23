@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Admin\AdminDashboardController;
-
+use App\Http\Controllers\CommandeUserController;
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CartController;
@@ -13,7 +13,9 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/register', function () {
     return view('auth.register');
 })->name('register');
-
+Route::middleware(['auth'])->group(function () {
+    Route::get('/mes-commandes', [CommandeUserController::class, 'index'])->name('user.commandes');
+});
 Route::post('/register', [AuthController::class, 'register'])
     ->name('register.post');
 

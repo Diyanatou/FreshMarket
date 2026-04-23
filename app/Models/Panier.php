@@ -32,4 +32,10 @@ class Panier extends Model
     {
         return $this->lignes->sum('quantite');
     }
+    public function scopeDisponible($query)
+{
+    return $query->whereHas('lots', function ($q) {
+        $q->where('date_expiration', '>', now());
+    });
+}
 }

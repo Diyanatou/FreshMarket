@@ -157,7 +157,7 @@
                             </div>
                         </div>
 
-                        <button type="submit" class="w-full flex items-center justify-center gap-3 px-8 py-4 bg-primary text-white font-black rounded-full hover:bg-secondary transition-all shadow-xl shadow-blue-100 group">
+                        <button type="submit" class="w-full flex items-center justify-center gap-3 px-8 py-4 bg-primary text-white font-black rounded-full ">
                             Confirmer la commande
                             <i class="fas fa-check-circle group-hover:scale-110 transition-transform"></i>
                         </button>

@@ -93,7 +93,7 @@
             <div class="flex items-center gap-8 text-sm">
                 <a href="/" class="text-red-600 font-bold transition-colors">Accueil</a>
                 @auth
-                <a href="#" class="text-white hover:text-accent transition-colors font-medium">Mes commandes</a>
+                <a href="{{ route('user.commandes') }}" class="text-white hover:text-red-600 transition-colors font-medium">Mes commandes</a>
                 @can('viewAdminDashboard', App\Models\User::class)
                 <a href="{{ route('dashboard') }}" class="bg-red-600 text-white px-4 py-1.5 rounded-lg font-bold flex items-center gap-2 shadow-sm">
                     <i class="fas fa-chart-line"></i> Dashboard Admin

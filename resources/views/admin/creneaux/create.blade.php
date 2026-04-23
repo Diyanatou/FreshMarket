@@ -17,7 +17,7 @@
 
         <div class="space-y-1">
             <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest px-1">Date de livraison</label>
-            <input type="date" name="date" value="{{ old('date', now()->addDay()->format('Y-m-d')) }}" required class="w-full border-gray-100 focus:ring-primary focus:border-primary rounded-xl text-sm font-bold @error('date') border-red-500 @enderror">
+            <input type="date" name="date" value="{{ old('date', now()->addDay()->format('Y-m-d')) }}" required class="w-full border-black-100 focus:ring-black focus:border-black rounded-xl text-sm font-bold @error('date') border-red-500 @enderror">
             @error('date') <p class="text-xs text-red-500 mt-1">{{ $message }}</p> @enderror
         </div>
 
@@ -42,7 +42,7 @@
         </div>
 
         <div class="pt-4">
-            <button type="submit" class="w-full py-4 bg-primary text-white font-black rounded-xl hover:bg-secondary transition-all shadow-xl shadow-blue-100 flex items-center justify-center gap-2">
+            <button type="submit" class="w-full py-4 bg-primary text-white font-black rounded-xl">
                 <i class="fas fa-check-circle"></i> Créer le créneau
             </button>
         </div>

@@ -106,7 +106,7 @@
                             Retour à la boutique
                         </a>
                         <form action="{{ route('cart.clear') }}" method="POST" onsubmit="return confirm('Vider tout le panier ?')">
-                            @csrfpp
+                            @csrf
                             <button type="submit" class="px-6 py-3 bg-white text-red-500 font-bold rounded-full border border-red-600">
                                 Vider le panier
                             </button>
