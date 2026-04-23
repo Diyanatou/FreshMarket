@@ -18,9 +18,11 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
+        'nom',
+        'prenom',
         'email',
         'password',
+        'role_id',
     ];
 
     /**
@@ -44,5 +46,20 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+
+    public function panier()
+    {
+        return $this->hasOne(Panier::class, 'utilisateur_id');
+    }
+
+    public function commandes()
+    {
+        return $this->hasMany(Commande::class, 'utilisateur_id');
     }
 }
