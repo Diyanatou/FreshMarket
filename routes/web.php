@@ -25,7 +25,8 @@ Route::get('/login', function () {
 
 Route::post('/login', [AuthController::class, 'login'])
     ->name('login.post');
-
+Route::get('/admin/rapports/pertes', [\App\Http\Controllers\Admin\RapportController::class, 'pertes'])
+    ->name('admin.rapports.pertes');
 
 Route::post('/logout', [AuthController::class, 'logout'])
     ->name('logout');
