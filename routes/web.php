@@ -37,7 +37,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/mes-commandes', [CommandeUserController::class, 'index'])
         ->name('user.commandes');
-}
     /*
     |--------------------------------------------------------------------------
     | ADMIN DASHBOARD
@@ -123,7 +122,7 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('/remove/{ligne}', [CartController::class, 'remove'])->name('remove');
         Route::post('/clear', [CartController::class, 'clear'])->name('clear');
     });
-    Route::middleware(['auth'])->group(function () {
+
     Route::prefix('admin/achats')->name('achats.')->group(function () {
 
     // 📄 INDEX = LISTE + FORMULAIRE CREATE + DELETE
