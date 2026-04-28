@@ -21,12 +21,17 @@ class Produit extends Model
         'image',
     ];
 
-    // 🏷️ RELATIONS
+    protected $casts = [
+        'actif' => 'boolean',
+    ];
+
+    // 🏷️ RELATION : CATEGORIE
     public function categorie()
     {
         return $this->belongsTo(Categorie::class);
     }
 
+    // 📦 RELATION : LOTS
     public function lots()
     {
         return $this->hasMany(LotProduit::class);
@@ -43,16 +48,22 @@ class Produit extends Model
             ->where('quantite', '>', 0);
     }
 
-    // 📊 STOCK TOTAL (TOUS LOTS)
+    // 📊 STOCK TOTAL (tous les lots)
     public function stockTotal()
     {
         return $this->lots()->sum('quantite');
     }
 
-    // 📊 STOCK DISPONIBLE (UNIQUEMENT VALIDE)
+    // 📊 STOCK DISPONIBLE (lots valides uniquement)
     public function stockDisponible()
     {
         return $this->lotsValides()->sum('quantite');
+    }
+
+    // ⚠️ STOCK EN ALERTE
+    public function isStockAlerte(): bool
+    {
+        return $this->stockDisponible() <= $this->seuil_alerte;
     }
 
     // ✅ DISPONIBILITÉ PRODUIT
@@ -61,11 +72,20 @@ class Produit extends Model
         return $this->actif && $this->stockDisponible() > 0;
     }
 
-    // 🔥 DIMINUTION STOCK (FEFO propre)
+    // 💸 VALEUR DU STOCK (basée sur prix achat)
+    public function valeurStock()
+    {
+        return $this->lots()->sum(function ($lot) {
+            return $lot->quantite * $lot->prix_achat;
+        });
+    }
+
+    // 🔥 SORTIE STOCK (FIFO / FEFO)
     public function decrementStock(int $quantite)
     {
         $lots = $this->lotsValides()
-            ->orderBy('date_expiration', 'asc')
+            ->orderByRaw('date_expiration IS NULL') // NULL en dernier
+            ->orderBy('date_expiration', 'asc')     // FEFO
             ->get();
 
         $restant = $quantite;
@@ -83,6 +103,7 @@ class Produit extends Model
             }
         }
 
+        // ❌ sécurité
         if ($restant > 0) {
             throw new \Exception("Stock insuffisant pour : " . $this->nom);
         }

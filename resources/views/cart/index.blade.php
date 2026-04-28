@@ -29,7 +29,7 @@
             </div>
             <h2 class="text-xl font-bold text-gray-800 mb-2">Votre panier est vide</h2>
             <p class="text-gray-500 mb-8">On dirait que vous n'avez pas encore fait votre choix.</p>
-            <a href="{{ url('/') }}" class="inline-flex items-center justify-center px-8 py-3 bg-[#00B207] text-white font-bold rounded-full hover:bg-green-600 transition-all shadow-lg shadow-green-100">
+            <a href="{{ url('/') }}" class="inline-flex items-center justify-center px-8 py-3 bg-red-600 text-white font-bold rounded-full">
                 Commencer mes achats
             </a>
         </div>
